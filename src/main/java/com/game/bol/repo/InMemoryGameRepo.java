@@ -15,4 +15,8 @@ public class InMemoryGameRepo {
         gameMap.put(game.getId(), game);
         return gameMap.get(game.getId());
     }
+
+    public Game getById(String id){
+        return gameMap.get(id);
+    }
 }

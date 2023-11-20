@@ -12,7 +12,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private Status status;
-
+    private Player winner;
 
     public Game(Integer initialStoneOnPit) {
         this.player1 = new Player(Player.PLAYER1_INDEX, "player1");
@@ -21,4 +21,5 @@ public class Game {
         this.status = Status.ACTIVE;
 
     }
+
 }

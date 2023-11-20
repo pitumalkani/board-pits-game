@@ -1,5 +1,6 @@
 package com.game.bol.controller;
 
+import com.game.bol.model.Player;
 import com.game.bol.service.GameService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,10 @@ public class GameController {
     @PostMapping("/init")
     public ResponseEntity init(@RequestParam int numberOfStones){
         return  ResponseEntity.status(HttpStatus.CREATED).body(gameService.initGame(numberOfStones));
+    }
+
+    @PostMapping("/{id}/move")
+    public ResponseEntity move(@PathVariable final String gameId, @RequestParam final int pitIndex) {
+        return ResponseEntity.ok().body(gameService.move(gameId, pitIndex));
     }
 }

@@ -42,4 +42,33 @@ public class Board {
 
         return pits;
     }
+
+    public Pit getPitByPitIndex(Integer pitIndex){
+        return pits.get(pitIndex);
+    }
+    public Pit getNextPit(Pit pit){
+        return pits.get(pit.nextPitIndex());
+    }
+    public Pit getOppositePit(Pit pit){
+        return pits.get(pit.getOppositePitIndex());
+    }
+    public Pit getPlayerHouse(Integer playerIndex) {
+        return pits.get(playerIndex.equals(Player.PLAYER1_INDEX) ? Board.PLAYER1_HOUSE : Board.PLAYER2_HOUSE);
+    }
+
+    public Integer getPlayer1PitStoneCount(){
+        Integer player1PitStoneCount = 0;
+        for(int i = Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++){
+            player1PitStoneCount += this.getPits().get(i).getStoneCount();
+        }
+        return player1PitStoneCount;
+    }
+
+    public Integer getPlayer2PitStoneCount(){
+        Integer player2PitStoneCount = 0;
+        for(int i=Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++){
+            player2PitStoneCount += this.getPits().get(i).getStoneCount();
+        }
+        return player2PitStoneCount;
+    }
 }
