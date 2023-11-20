@@ -1,18 +1,28 @@
 package com.game.bol.controller;
 
+import com.game.bol.service.GameService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/game")
 public class GameController {
 
+    private GameService gameService;
+
+    public GameController(final GameService gameService){
+        this.gameService = gameService;
+    }
+
     @GetMapping("/greeting")
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public String greeting() {
         return "hello world";
+    }
+
+    @PostMapping("/init")
+    public ResponseEntity init(@RequestParam int numberOfStones){
+        return  ResponseEntity.status(HttpStatus.CREATED).body(gameService.initGame(numberOfStones));
     }
 }
