@@ -9,9 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -21,8 +19,6 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 public class GameControllerTest {
     private static final String BASE_PATH = "/api/game";
-    private static final Integer INITIAL_STONE_ON_PIT = 6;
-    private static final Integer INITIAL_STONE_ON_HOUSE = 0;
     private static final Integer PLAYER1_INDEX = 1;
     private static final Integer PLAYER2_INDEX = 2;
     private static MockHttpServletRequestBuilder initGameRequest;

@@ -4,8 +4,6 @@ public enum Status {
 
     ACTIVE,
 
-    DRAW,
-
     PLAYER1_TURN,
 
     PLAYER2_TURN,

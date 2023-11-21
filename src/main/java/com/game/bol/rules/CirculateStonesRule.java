@@ -19,11 +19,11 @@ public class CirculateStonesRule extends GameRule {
             currentPit = game.getBoard().getNextPit(currentPit);
             log.debug("next pit {}", currentPit);
 
-                if (currentPit.isDistributable(game.getStatus())) {
-                    currentPit.setStoneCount(currentPit.getStoneCount() + 1);
-                }else{
-                    i--;
-                }
+            if (currentPit.isDistributable(game.getStatus())) {
+                currentPit.setStoneCount(currentPit.getStoneCount() + 1);
+            } else {
+                i--;
+            }
         }
 
         this.next.apply(game, currentPit);

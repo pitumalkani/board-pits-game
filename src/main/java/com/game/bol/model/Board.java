@@ -1,8 +1,8 @@
 package com.game.bol.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,13 +23,13 @@ public class Board {
 
     public Board(Integer initialStonesOnPit, Player player1, Player player2) {
         //initialization of pits here
-        initPit(initialStonesOnPit,player1,player2);
+        initPit(initialStonesOnPit, player1, player2);
     }
 
-    private Map<Integer, Pit> initPit(Integer initialStoneOnPit, Player player1, Player player2){
+    private Map<Integer, Pit> initPit(Integer initialStoneOnPit, Player player1, Player player2) {
 
         this.pits = new ConcurrentHashMap<>();
-        for(int i= Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++){
+        for (int i = Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++) {
             Pit pit = new Pit(i, initialStoneOnPit, player1.getPlayerIndex());
             pits.put(i, pit);
         }
@@ -37,7 +37,7 @@ public class Board {
         pits.put(Board.PLAYER1_HOUSE, house1);
 
 
-        for(int i= Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++){
+        for (int i = Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++) {
             Pit pit = new Pit(i, initialStoneOnPit, player2.getPlayerIndex());
             pits.put(i, pit);
         }
@@ -47,30 +47,33 @@ public class Board {
         return pits;
     }
 
-    public Pit getPitByPitIndex(Integer pitIndex){
+    public Pit getPitByPitIndex(Integer pitIndex) {
         return pits.get(pitIndex);
     }
-    public Pit getNextPit(Pit pit){
+
+    public Pit getNextPit(Pit pit) {
         return pits.get(pit.nextPitIndex());
     }
-    public Pit getOppositePit(Pit pit){
+
+    public Pit getOppositePit(Pit pit) {
         return pits.get(pit.getOppositePitIndex());
     }
+
     public Pit getPlayerHouse(Integer playerIndex) {
         return pits.get(playerIndex.equals(Player.PLAYER1_INDEX) ? Board.PLAYER1_HOUSE : Board.PLAYER2_HOUSE);
     }
 
-    public Integer getPlayer1PitStoneCount(){
+    public Integer getPlayer1PitStoneCount() {
         Integer player1PitStoneCount = 0;
-        for(int i = Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++){
+        for (int i = Board.PIT_START_INDEX; i < Board.PLAYER1_HOUSE; i++) {
             player1PitStoneCount += this.getPits().get(i).getStoneCount();
         }
         return player1PitStoneCount;
     }
 
-    public Integer getPlayer2PitStoneCount(){
+    public Integer getPlayer2PitStoneCount() {
         Integer player2PitStoneCount = 0;
-        for(int i=Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++){
+        for (int i = Board.PLAYER1_HOUSE + 1; i < Board.PLAYER2_HOUSE; i++) {
             player2PitStoneCount += this.getPits().get(i).getStoneCount();
         }
         return player2PitStoneCount;
@@ -79,14 +82,14 @@ public class Board {
 
     public List<Integer> getPlayer1Pits() {
         return this.getPits().values().stream()
-                .filter(pit -> pit.getIndex() >= Board.PIT_START_INDEX && pit.getIndex() <Board.PLAYER1_HOUSE)
+                .filter(pit -> pit.getIndex() >= Board.PIT_START_INDEX && pit.getIndex() < Board.PLAYER1_HOUSE)
                 .map(Pit::getStoneCount)
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getPlayer2Pits() {
         return this.getPits().values().stream()
-                .filter(pit -> pit.getIndex() >= Board.PLAYER1_HOUSE+1 && pit.getIndex() <Board.PLAYER2_HOUSE)
+                .filter(pit -> pit.getIndex() >= Board.PLAYER1_HOUSE + 1 && pit.getIndex() < Board.PLAYER2_HOUSE)
                 .map(Pit::getStoneCount)
                 .collect(Collectors.toList());
     }
