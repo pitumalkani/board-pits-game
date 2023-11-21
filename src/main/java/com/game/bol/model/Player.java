@@ -4,6 +4,7 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Player{
 
     public static final Integer PLAYER1_INDEX = 1;

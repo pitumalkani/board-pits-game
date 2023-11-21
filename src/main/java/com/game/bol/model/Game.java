@@ -2,8 +2,10 @@ package com.game.bol.model;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Game {
 
     private String id;

@@ -2,10 +2,14 @@ package com.game.bol.model;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class Board {
 
     public static final Integer PIT_START_INDEX = 1;
@@ -71,4 +75,20 @@ public class Board {
         }
         return player2PitStoneCount;
     }
+
+
+    public List<Integer> getPlayer1Pits() {
+        return this.getPits().values().stream()
+                .filter(pit -> pit.getIndex() >= Board.PIT_START_INDEX && pit.getIndex() <Board.PLAYER1_HOUSE)
+                .map(Pit::getStoneCount)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> getPlayer2Pits() {
+        return this.getPits().values().stream()
+                .filter(pit -> pit.getIndex() >= Board.PLAYER1_HOUSE+1 && pit.getIndex() <Board.PLAYER2_HOUSE)
+                .map(Pit::getStoneCount)
+                .collect(Collectors.toList());
+    }
+
 }

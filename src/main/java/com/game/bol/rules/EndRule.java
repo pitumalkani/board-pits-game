@@ -4,17 +4,19 @@ package com.game.bol.rules;
 import com.game.bol.model.Game;
 import com.game.bol.model.Pit;
 import com.game.bol.model.Status;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * This class is responsible to check the last stone placing rules.
  *
  */
+@Slf4j
 public class EndRule extends GameRule {
 
 
     @Override
     public void apply(Game game, Pit currentPit) {
-
+        log.debug("check the rules for circulating stone to the next pit(s)");
         handleLastEmptyPit(game,currentPit);
         nextPlayerTurn(game,currentPit);
         this.next.apply(game, currentPit);// Next verify the winner
@@ -41,8 +43,7 @@ public class EndRule extends GameRule {
 
     private void nextPlayerTurn(Game game, Pit endPit) {
         Status currentStatus = game.getStatus();
-        int playerIndex = endPit.getPlayerIndex();
-        Status newStatus = currentStatus;
+        Status newStatus = null;
 
         if (endPit.isPlayer1House() && currentStatus == Status.PLAYER1_TURN) {
             newStatus = Status.PLAYER1_TURN;
